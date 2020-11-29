@@ -31,15 +31,29 @@ function indexAt(node, collection, linkedList) {
     let currentIndex = 0
     while(current !== node) {
         currentIndex++
-        current = next(node, collection)
+        current = next(current, collection)
     }
     return currentIndex
 }
 
-// function insertNodeAt() {
+function insertNodeAt(index, newNodeAddress,linkedList, collection) {
+    let previousNode = nodeAt(index-1, linkedList, collection)
+    let nextNode = nodeAt(index, linkedList, collection)
+    // let previousNodeIdx = indexAt(previousNode, collection, linkedList)
+    // let nextNodeIsx = indexAt(nextNode, collection, linkedList)
+    // let previousNodeAddress = addressAt(previousNode, linkedList, collection)
+    let nextNodeAddress = addressAt(nextNode, linkedList, collection)
+    previousNode.next = newNodeAddress
+    let newNode = collection[newNodeAddress]
+    newNode.next = nextNodeAddress
+}
 
-// }
-
-// function deleteNodeAt() {
-
-// }
+function deleteNodeAt(index, linkedList, collection) {
+    let prev;
+    let curr = headNode(linkedList, collection)
+    for (let i = 0; i < index; i++) {
+        prev = curr
+        curr = next(curr, collection)
+    }
+    prev.next = curr.next
+}
